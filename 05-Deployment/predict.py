@@ -12,10 +12,12 @@ def predict_single(customer):
     result = pipeline1.predict_proba(customer)[0, 1]
     return float(result)
 
+from typing import Dict, Any
 
 @app.post("/predict")
-def predict(customer):
+def predict(customer: Dict[str, Any]):
     prob = predict_single(customer)
+
 
     return {
         "conversion_probability": prob,
@@ -24,4 +26,4 @@ def predict(customer):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8080)
+    uvicorn.run(app, host="0.0.0.0", port=9696)
