@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: subscription-service # <--- Service name, typically descriptive
+spec:
+  type: LoadBalancer        # Exposes the service externally (often via a cloud provider or kind's ingress)
+  selector:
+    app: subscription       # <--- MUST match the 'app' label in your Pods/Deployment
+  ports:
+  - protocol: TCP           # Default protocol
+    port: 80                # The port the LoadBalancer/Service listens on (standard HTTP)
+    targetPort: 9696        # <--- The port the Pod container is actually listening on
